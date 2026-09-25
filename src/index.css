@@ -1,21 +1,323 @@
-/* HOTEL SWASTIKA INN - DESIGN TOKENS */
+/* ==========================================================================
+   HOTEL SWASTIKA INN - DESIGN SYSTEM & GLOBAL STYLES
+   Aesthetic: Warm Ayodhya Hospitality, Luminous Ivory, Sandstone & Royal Gold
+   ========================================================================== */
+
 :root {
+  /* Warm Background Palette (Warm Cream, Sandstone, Alabaster) */
   --bg-base: #fcfaf7;
   --bg-primary: #fbf8f4;
   --bg-secondary: #f4eee7;
   --bg-card: #ffffff;
+  --bg-card-hover: #fffdfa;
+  --bg-surface: rgba(255, 255, 255, 0.88);
+  --bg-warm-tint: #f8f3ec;
+
+  /* Warm Indian Gold & Amber Accents */
   --gold-primary: #b88a24;
   --gold-rich: #c59b27;
   --gold-light: #e6c875;
   --gold-dark: #966f14;
   --gold-gradient: linear-gradient(135deg, #c59b27 0%, #e6c875 50%, #ab7f1b 100%);
+  --gold-subtle: rgba(197, 155, 39, 0.12);
+  --gold-glow: rgba(197, 155, 39, 0.25);
+
+  /* Warm Earth & Saffron Accents */
+  --saffron-subtle: rgba(200, 106, 40, 0.1);
+  --saffron-accent: #c86a28;
+
+  /* Warm Text Palette (Deep Espresso, Warm Charcoal, Earthy Muted) */
   --text-primary: #1e1710;
   --text-secondary: #4a3f35;
   --text-muted: #7c6f62;
+  --text-light: #fdfaf5;
+
+  /* Warm Subtle Borders */
+  --border-subtle: rgba(150, 110, 50, 0.14);
+  --border-gold: rgba(197, 155, 39, 0.35);
+  --border-strong: rgba(150, 110, 50, 0.25);
+
+  /* Radius & Spacing */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-full: 9999px;
+
+  /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Soft Warm Shadows */
+  --shadow-sm: 0 4px 14px rgba(70, 45, 15, 0.05);
+  --shadow-md: 0 10px 28px rgba(70, 45, 15, 0.08);
+  --shadow-lg: 0 20px 45px rgba(70, 45, 15, 0.12);
+  --shadow-gold: 0 8px 24px rgba(184, 138, 36, 0.22);
+
+  /* Transitions */
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Basics */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.15rem;
+  background: var(--gold-subtle);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  color: var(--gold-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 2.75rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.section-title span {
+  background: linear-gradient(135deg, #a87915 0%, #c59b27 50%, #91680d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Buttons & Interactive Elements */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+  overflow: hidden;
+}
+
+.btn svg {
+  transition: transform 0.25s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-primary {
+  background: var(--gold-gradient);
+  color: #1a140b;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(184, 138, 36, 0.28);
+}
+
+/* Golden Shimmer Reflection */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn-primary:hover::before {
+  left: 160%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(184, 138, 36, 0.42);
+  filter: brightness(1.04);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: #fffdfa;
+  border-color: var(--gold-primary);
+  color: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(70, 45, 15, 0.12);
+}
+
+.btn-secondary:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold-dark);
+  border: 1.5px solid var(--gold-primary);
+}
+
+.btn-outline-gold:hover {
+  background: var(--gold-subtle);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(184, 138, 36, 0.2);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.28);
+}
+
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
+.btn-whatsapp:hover::before {
+  left: 160%;
+}
+
+.btn-whatsapp:hover {
+  background: #20bd5a;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-whatsapp:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 140, 70, 0.35);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.15rem;
+  }
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
 }
