@@ -1,0 +1,21 @@
+/* HOTEL SWASTIKA INN - DESIGN TOKENS */
+:root {
+  --bg-base: #fcfaf7;
+  --bg-primary: #fbf8f4;
+  --bg-secondary: #f4eee7;
+  --bg-card: #ffffff;
+  --gold-primary: #b88a24;
+  --gold-rich: #c59b27;
+  --gold-light: #e6c875;
+  --gold-dark: #966f14;
+  --gold-gradient: linear-gradient(135deg, #c59b27 0%, #e6c875 50%, #ab7f1b 100%);
+  --text-primary: #1e1710;
+  --text-secondary: #4a3f35;
+  --text-muted: #7c6f62;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
