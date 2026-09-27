@@ -206,3 +206,29 @@ export const BANQUET_DATA = [
   }
 ];
 
+export const AYODHYA_HIGHLIGHTS = [
+  {
+    name: "Shri Ram Janmabhoomi Mandir",
+    distance: "~15-20 Mins",
+    description: "The grand sacred temple complex of Bhagwan Shri Ram, conveniently accessible via the bypass corridor.",
+    type: "Pilgrimage"
+  },
+  {
+    name: "Hanuman Garhi & Kanak Bhawan",
+    distance: "~15-20 Mins",
+    description: "Ancient spiritual heart of Ayodhya revered by devotees worldwide for divine blessings.",
+    type: "Pilgrimage"
+  },
+  {
+    name: "Saryu River Ghats & Maha Aarti",
+    distance: "~20 Mins",
+    description: "Experience the mesmerizing evening Saryu Aarti, holy dip, and tranquil riverside spirituality.",
+    type: "Cultural"
+  },
+  {
+    name: "Maharishi Valmiki Airport (AYJ)",
+    distance: "~15 Mins",
+    description: "Effortless transit to and from Ayodhya International Airport along the smooth bypass road.",
+    type: "Transit"
+  }
+];
