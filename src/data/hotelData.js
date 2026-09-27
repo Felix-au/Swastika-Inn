@@ -1,0 +1,15 @@
+export const HOTEL_INFO = {
+  name: "Hotel Swastika Inn",
+  subtitle: "Rooms • Banquet • Lawn",
+  tagline: "Ayodhya Dham's Premier Hospitality & Celebration Haven",
+  phonePrimary: "+916393556011",
+  phoneSecondary: "+919415406011",
+  phoneDisplayPrimary: "+91 63935 56011",
+  phoneDisplaySecondary: "+91 94154 06011",
+  email: "swastika.ayodhyaji@gmail.com",
+  address: "Near Muhavara Bypass, Ayodhya, Uttar Pradesh – 224123",
+  googleMapsUrl: "https://maps.google.com/?q=Hotel+Swastika+Inn+Ayodhya",
+  whatsappNumber: "916393556011",
+  checkInTime: "12:00 PM",
+  checkOutTime: "11:00 AM",
+};
