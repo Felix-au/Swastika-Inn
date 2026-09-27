@@ -77,5 +77,93 @@ export const ROOMS_DATA = [
       features: "Hindware hot water geyser, overhead shower, mirror vanity, non-slip tiled flooring"
     }
   },
-  
+  {
+    id: "deluxe-double",
+    title: "Deluxe King / Double Room",
+    category: "Deluxe",
+    tag: "Contemporary Comfort",
+    heroImage: "/images/room-deluxe-double.jpeg",
+    gallery: [
+      "/images/room-deluxe-double.jpeg",
+      "/images/room-deluxe-amenities.jpeg",
+      "/images/bathroom-geyser-shower.jpeg"
+    ],
+    bedType: "1 King / Double Bed",
+    capacity: "2 Guests",
+    size: "290 sq. ft.",
+    description:
+      "Modern aesthetic room featuring a soothing geometric accent wall, studded headboard, in-room mini-fridge/cooler, tea & coffee counter, and comfortable twin armchairs with coffee table.",
+    highlights: [
+      "Plush Studded Double Bed",
+      "Personal In-Room Mini-Fridge",
+      "Electric Tea & Coffee Kettle",
+      "Twin Armchairs & Coffee Table",
+      "Attached Bathroom with Geyser",
+      "Full Split Air Conditioning"
+    ],
+    bathroom: {
+      image: "/images/bathroom-geyser-shower.jpeg",
+      type: "Attached Western Bath",
+      features: "Instant hot water geyser, wall shower, chrome mixer taps, modern sanitary ware"
+    }
+  },
+  {
+    id: "damask-twin",
+    title: "Damask Twin Room",
+    category: "Deluxe",
+    tag: "Classic Elegance",
+    heroImage: "/images/room-damask-twin.jpeg",
+    gallery: [
+      "/images/room-damask-twin.jpeg",
+      "/images/bathroom-modern.jpeg"
+    ],
+    bedType: "1 Double Bed + 1 Single Bed",
+    capacity: "3 Guests",
+    size: "310 sq. ft.",
+    description:
+      "Adorned in classic monochrome damask wallpaper, offering flexible sleeping arrangements with two beds, vanity dressing mirror, electric kettle, and cozy lounge seating.",
+    highlights: [
+      "Classic Damask Motif Feature Wall",
+      "Dual Bed Sleeping Setup",
+      "Electric Kettle & Tea Setup",
+      "Attached Western Bathroom",
+      "High Efficiency Split AC",
+      "High-Speed Wi-Fi"
+    ],
+    bathroom: {
+      image: "/images/bathroom-modern.jpeg",
+      type: "Attached Western Bath",
+      features: "Modern ceramic commode, geyser, hot/cold shower mixers, vanity"
+    }
+  },
+  {
+    id: "standard-queen",
+    title: "Standard Queen Room",
+    category: "Standard",
+    tag: "Cozy & Peaceful",
+    heroImage: "/images/room-standard-queen.jpeg",
+    gallery: [
+      "/images/room-standard-queen.jpeg",
+      "/images/bathroom-tiles.jpeg"
+    ],
+    bedType: "1 Queen Size Bed",
+    capacity: "2 Guests",
+    size: "250 sq. ft.",
+    description:
+      "A serene and comfortable haven featuring warm ambient lighting, textured wave-pattern feature wall, wooden queen bed with plush linen, and modern attached bathroom.",
+    highlights: [
+      "Comfortable Queen Size Bed",
+      "Textured Feature Wall",
+      "Attached Western Bathroom with Geyser",
+      "Split Air Conditioning",
+      "Wall Mounted TV",
+      "Daily Housekeeping"
+    ],
+    bathroom: {
+      image: "/images/bathroom-tiles.jpeg",
+      type: "Attached Western Bath",
+      features: "Water heater, overhead shower, sanitized western toilet"
+    }
+  }
 ];
+
