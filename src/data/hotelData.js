@@ -167,3 +167,42 @@ export const ROOMS_DATA = [
   }
 ];
 
+export const BANQUET_DATA = [
+  {
+    id: "banquet-hall",
+    title: "Grand Indoor Banquet Hall",
+    capacity: "100 – 350+ Guests",
+    bestFor: "Weddings, Ring Ceremonies, Tilak, Birthday Parties & Corporate Meets",
+    image: "/images/banquet-hall.jpeg",
+    secondaryImage: "/images/birthday-stage.jpeg",
+    description:
+      "Fully air-conditioned indoor banquet hall equipped with comfortable banquet chairs, stage setup, customizable floral/balloon backdrops, and advanced sound infrastructure.",
+    features: [
+      "Central Air Conditioning",
+      "Customizable Celebration Stages",
+      "Round Table & Theater Style Seating",
+      "Dedicated Stage Lighting & Sound",
+      "Adjacent Groom/Bride Dressing Rooms",
+      "Direct Guest Elevator & Stair Access"
+    ]
+  },
+  {
+    id: "celebration-lawn",
+    title: "Royal Open-Air Lawn & Catering Facility",
+    capacity: "200 – 700+ Guests",
+    bestFor: "Grand Wedding Receptions, Sangeet Nights, Open-Air Galas & Large Gatherings",
+    image: "/images/lawn-buffet.jpeg",
+    secondaryImage: "/images/event-stage.jpeg",
+    description:
+      "Expansive outdoor lawn venue with lush green surroundings, canopy fairy lighting, built-in buffet catering lines with food warmers, live music stage, and decorative photo booths.",
+    features: [
+      "Expansive Open-Air Lawn Area",
+      "Built-in Buffet & Live Counter Stalls",
+      "Raised Stage for Live Band & DJ",
+      "Festive Fairy & Canopy Lighting",
+      "Themed Selfie & Photo Booth Corners",
+      "Large Courtyard Parking for 50+ Cars"
+    ]
+  }
+];
+
