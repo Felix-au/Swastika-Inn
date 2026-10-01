@@ -1,8 +1,13 @@
 import React from 'react';
 import { Users, Sparkles, CheckCircle2, Calendar, Phone, ArrowRight } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { BANQUET_DATA, HOTEL_INFO } from '../data/hotelData';
 
 export default function BanquetAndEvents({ onOpenBooking }) {
+  const { content } = useHotelContent();
+  const venuesList = content?.banquets || BANQUET_DATA;
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   return (
     <section id="banquets" className="banquet-section">
       <div className="container">
@@ -22,7 +27,7 @@ export default function BanquetAndEvents({ onOpenBooking }) {
 
         {/* Venues Showcase Cards */}
         <div className="venues-grid">
-          {BANQUET_DATA.map((venue) => (
+          {venuesList.map((venue) => (
             <div key={venue.id} className="venue-card">
               {/* Dual Image Preview */}
               <div className="venue-images-wrap">
@@ -79,7 +84,7 @@ export default function BanquetAndEvents({ onOpenBooking }) {
                   </button>
 
                   <a 
-                    href={`tel:${HOTEL_INFO.phonePrimary}`} 
+                    href={`tel:${hotelInfo.phonePrimary}`} 
                     className="btn btn-secondary venue-call-btn"
                   >
                     <Phone size={15} />

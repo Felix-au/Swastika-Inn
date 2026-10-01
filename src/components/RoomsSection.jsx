@@ -1,8 +1,12 @@
 import React from 'react';
 import { Users, Bed, Droplets, Tv, Wind, CheckCircle2, ArrowRight, Eye, Sparkles } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { ROOMS_DATA } from '../data/hotelData';
 
 export default function RoomsSection({ onSelectRoom, onOpenBooking }) {
+  const { content } = useHotelContent();
+  const roomsList = content?.rooms || ROOMS_DATA;
+
   return (
     <section id="rooms" className="rooms-section">
       <div className="container">
@@ -22,7 +26,7 @@ export default function RoomsSection({ onSelectRoom, onOpenBooking }) {
 
         {/* Rooms Grid - Centered Symmetrical Layout */}
         <div className="rooms-grid">
-          {ROOMS_DATA.map((room) => (
+          {roomsList.map((room) => (
             <div key={room.id} className="room-card">
               {/* Image & Badges */}
               <div className="room-img-container">
