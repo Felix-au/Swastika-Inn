@@ -1,16 +1,24 @@
-# React + Vite
+# Hotel Swastika Inn & Banquet & Lawn – Ayodhya Dham
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Official web application for **Hotel Swastika Inn**, located near Muhavara Bypass, Ayodhya, Uttar Pradesh (224123).
 
-Currently, two official plugins are available:
+## Features
+- **Suites & Rooms Catalogue**: Executive King Suite, Family Triple Suite (Room 107), Deluxe King / Double, Damask Twin, and Standard Queen rooms with attached western bathrooms and geysers.
+- **Banquets & Celebrations**: Grand Indoor Banquet Hall (100–350+ capacity) and Royal Open-Air Celebration Lawn (200–700+ capacity) for wedding receptions, sangeets, and corporate meets.
+- **Amenities**: 24/7 power backup, high-speed elevator, 50+ car courtyard parking, hygienic dining, and Wi-Fi.
+- **Ayodhya Pilgrimage Guide**: Distance milestones to Ram Janmabhoomi (~15 mins), Hanuman Garhi, Saryu Ghats, and Maharishi Valmiki Airport AYJ (~15 mins).
+- **Interactive Booking Engine**: Direct WhatsApp inquiry generation and phone booking links.
+- **Mobile Action Bar**: Sticky mobile contact bar for Call Now, WhatsApp, and Instant Booking.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React 19 + Vite
+- Lucide React Icons
+- Custom Vanilla CSS Design System with warm Ayodhya aesthetic
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Development
+```bash
+npm install
+npm run dev
+npm run build
+npm run lint
+```
