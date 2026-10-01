@@ -1,0 +1,305 @@
+export const DEFAULT_SITE_DATA = {
+  settings: {
+    hotelName: "Hotel Swastika Inn",
+    subtitle: "Rooms • Banquet • Lawn",
+    tagline: "Ayodhya Dham's Premier Hospitality & Celebration Haven",
+    phonePrimary: "+916393556011",
+    phoneSecondary: "+919415406011",
+    phoneDisplayPrimary: "+91 63935 56011",
+    phoneDisplaySecondary: "+91 94154 06011",
+    email: "swastika.ayodhyaji@gmail.com",
+    address: "Near Muhavara Bypass, Ayodhya, Uttar Pradesh – 224123",
+    googleMapsUrl: "https://maps.google.com/?q=Hotel+Swastika+Inn+Ayodhya",
+    whatsappNumber: "916393556011",
+    checkInTime: "12:00 PM",
+    checkOutTime: "11:00 AM"
+  },
+  hero: {
+    badge: "Divine Stay in Sacred Ayodhya",
+    titlePrefix: "Royal Comfort",
+    titleSuffix: "& Grand Celebrations",
+    description: "Experience Ayodhya Dham's finest hospitality with opulent suites, attached western baths, grand banquet facilities, and a lush celebration lawn along the serene Muhavara Bypass corridor.",
+    backgroundImage: "/images/hero-facade-night.jpeg",
+    badges: [
+      { text: "Near Muhavara Bypass" },
+      { text: "~15 Mins to Ram Mandir" },
+      { text: "50+ Car Courtyard Parking" },
+      { text: "24/7 Hot Water Geyser" }
+    ]
+  },
+  rooms: [
+    {
+      id: "executive-king",
+      title: "Executive King Suite",
+      category: "Suites",
+      tag: "Most Popular",
+      heroImage: "/images/room-executive-king.jpeg",
+      gallery: [
+        "/images/room-executive-king.jpeg",
+        "/images/room-executive-king-angle.jpeg",
+        "/images/bathroom-modern.jpeg",
+        "/images/corridor.jpeg"
+      ],
+      bedType: "1 King Size Bed",
+      capacity: "2 Adults + 1 Child",
+      size: "320 sq. ft.",
+      description: "Indulge in royal comfort featuring a tufted rich red velvet headboard, designer floral accent wall, Persian runner rug, and twin plush cream leather bucket lounge chairs.",
+      highlights: [
+        "Tufted Red Velvet King Bed",
+        "Cream Leather Bucket Chairs",
+        "Attached Western Bath & Geyser",
+        "Silent Split Air Conditioning",
+        "Wall-Mounted Smart LED TV",
+        "Designer Ambient Cove Lighting"
+      ],
+      bathroom: {
+        image: "/images/bathroom-modern.jpeg",
+        type: "Attached Western Bath",
+        features: "Hot water geyser, rain shower, chrome mixers, hygiene health faucet, full height tiles"
+      }
+    },
+    {
+      id: "family-triple-suite",
+      title: "Family Triple Suite (Room 107)",
+      category: "Family",
+      tag: "Ideal for Families & Groups",
+      heroImage: "/images/room-family-twin.jpeg",
+      gallery: [
+        "/images/room-family-twin.jpeg",
+        "/images/room-family-wardrobe.jpeg",
+        "/images/room-family-balcony.jpeg",
+        "/images/bathroom-tiles.jpeg"
+      ],
+      bedType: "1 Double Bed + 1 Single Bed",
+      capacity: "3 to 4 Guests",
+      size: "360 sq. ft.",
+      description: "Spacious family accommodation configured with two beds, large wardrobe with dressing mirror, customized entertainment console, luggage stools, and direct private balcony access.",
+      highlights: [
+        "1 Double Bed + 1 Single Bed",
+        "Private Balcony Access",
+        "Full Height Wardrobe & Dressing Mirror",
+        "Custom Wooden TV & Storage Console",
+        "Attached Modern Bath with Geyser",
+        "Individual Climate Control AC"
+      ],
+      bathroom: {
+        image: "/images/bathroom-tiles.jpeg",
+        type: "Attached Western Bath",
+        features: "Hindware hot water geyser, overhead shower, mirror vanity, non-slip tiled flooring"
+      }
+    },
+    {
+      id: "deluxe-double",
+      title: "Deluxe King / Double Room",
+      category: "Deluxe",
+      tag: "Contemporary Comfort",
+      heroImage: "/images/room-deluxe-double.jpeg",
+      gallery: [
+        "/images/room-deluxe-double.jpeg",
+        "/images/room-deluxe-amenities.jpeg",
+        "/images/bathroom-geyser-shower.jpeg"
+      ],
+      bedType: "1 King / Double Bed",
+      capacity: "2 Guests",
+      size: "290 sq. ft.",
+      description: "Modern aesthetic room featuring a soothing geometric accent wall, studded headboard, in-room mini-fridge/cooler, tea & coffee counter, and comfortable twin armchairs with coffee table.",
+      highlights: [
+        "Plush Studded Double Bed",
+        "Personal In-Room Mini-Fridge",
+        "Electric Tea & Coffee Kettle",
+        "Twin Armchairs & Coffee Table",
+        "Attached Bathroom with Geyser",
+        "Full Split Air Conditioning"
+      ],
+      bathroom: {
+        image: "/images/bathroom-geyser-shower.jpeg",
+        type: "Attached Western Bath",
+        features: "Instant hot water geyser, wall shower, chrome mixer taps, modern sanitary ware"
+      }
+    },
+    {
+      id: "damask-twin",
+      title: "Damask Twin Room",
+      category: "Deluxe",
+      tag: "Classic Elegance",
+      heroImage: "/images/room-damask-twin.jpeg",
+      gallery: [
+        "/images/room-damask-twin.jpeg",
+        "/images/bathroom-modern.jpeg"
+      ],
+      bedType: "1 Double Bed + 1 Single Bed",
+      capacity: "3 Guests",
+      size: "310 sq. ft.",
+      description: "Adorned in classic monochrome damask wallpaper, offering flexible sleeping arrangements with two beds, vanity dressing mirror, electric kettle, and cozy lounge seating.",
+      highlights: [
+        "Classic Damask Motif Feature Wall",
+        "Dual Bed Sleeping Setup",
+        "Electric Kettle & Tea Setup",
+        "Attached Western Bathroom",
+        "High Efficiency Split AC",
+        "High-Speed Wi-Fi"
+      ],
+      bathroom: {
+        image: "/images/bathroom-modern.jpeg",
+        type: "Attached Western Bath",
+        features: "Modern ceramic commode, geyser, hot/cold shower mixers, vanity"
+      }
+    },
+    {
+      id: "standard-queen",
+      title: "Standard Queen Room",
+      category: "Standard",
+      tag: "Cozy & Peaceful",
+      heroImage: "/images/room-standard-queen.jpeg",
+      gallery: [
+        "/images/room-standard-queen.jpeg",
+        "/images/bathroom-tiles.jpeg"
+      ],
+      bedType: "1 Queen Size Bed",
+      capacity: "2 Guests",
+      size: "250 sq. ft.",
+      description: "A serene and comfortable haven featuring warm ambient lighting, textured wave-pattern feature wall, wooden queen bed with plush linen, and modern attached bathroom.",
+      highlights: [
+        "Comfortable Queen Size Bed",
+        "Textured Feature Wall",
+        "Attached Western Bathroom with Geyser",
+        "Split Air Conditioning",
+        "Wall Mounted TV",
+        "Daily Housekeeping"
+      ],
+      bathroom: {
+        image: "/images/bathroom-tiles.jpeg",
+        type: "Attached Western Bath",
+        features: "Water heater, overhead shower, sanitized western toilet"
+      }
+    }
+  ],
+  banquets: [
+    {
+      id: "banquet-hall",
+      title: "Grand Indoor Banquet Hall",
+      capacity: "100 – 350+ Guests",
+      bestFor: "Weddings, Ring Ceremonies, Tilak, Birthday Parties & Corporate Meets",
+      image: "/images/banquet-hall.jpeg",
+      secondaryImage: "/images/birthday-stage.jpeg",
+      description: "Fully air-conditioned indoor banquet hall equipped with comfortable banquet chairs, stage setup, customizable floral/balloon backdrops, and advanced sound infrastructure.",
+      features: [
+        "Central Air Conditioning",
+        "Customizable Celebration Stages",
+        "Round Table & Theater Style Seating",
+        "Dedicated Stage Lighting & Sound",
+        "Adjacent Groom/Bride Dressing Rooms",
+        "Direct Guest Elevator & Stair Access"
+      ]
+    },
+    {
+      id: "celebration-lawn",
+      title: "Royal Open-Air Lawn & Catering Facility",
+      capacity: "200 – 700+ Guests",
+      bestFor: "Grand Wedding Receptions, Sangeet Nights, Open-Air Galas & Large Gatherings",
+      image: "/images/lawn-buffet.jpeg",
+      secondaryImage: "/images/event-stage.jpeg",
+      description: "Expansive outdoor lawn venue with lush green surroundings, canopy fairy lighting, built-in buffet catering lines with food warmers, live music stage, and decorative photo booths.",
+      features: [
+        "Expansive Open-Air Lawn Area",
+        "Built-in Buffet & Live Counter Stalls",
+        "Raised Stage for Live Band & DJ",
+        "Festive Fairy & Canopy Lighting",
+        "Themed Selfie & Photo Booth Corners",
+        "Large Courtyard Parking for 50+ Cars"
+      ]
+    }
+  ],
+  experience: {
+    heading: "Curated for Divine Peace & Opulent Comfort",
+    subheading: "Every guest at Swastika Inn is blessed with modern conveniences, hygienic sanitation, and thoughtful Ayodhya hospitality.",
+    amenities: [
+      {
+        icon: "Car",
+        title: "Ample Courtyard Parking",
+        desc: "Spacious and secured on-premises parking accommodating 50+ guest vehicles, tour buses, and private cabs."
+      },
+      {
+        icon: "ArrowUpCircle",
+        title: "High-Speed Passenger Lift",
+        desc: "Effortless floor-to-floor elevator accessibility for elderly pilgrims, families, and luggage."
+      },
+      {
+        icon: "Zap",
+        title: "100% Silent Power Backup",
+        desc: "Heavy-duty generator infrastructure ensuring 24/7 seamless air-conditioning, lighting, and hot water."
+      },
+      {
+        icon: "UtensilsCrossed",
+        title: "Hygienic Pure Veg Dining",
+        desc: "Delicious Satvik dining and customized event catering crafted with pure ghee and local flavors."
+      },
+      {
+        icon: "Wifi",
+        title: "High-Speed Wi-Fi",
+        desc: "Fast optical fiber internet connectivity across all suites, lobby, banquet, and lawn spaces."
+      },
+      {
+        icon: "Clock",
+        title: "24/7 Front Desk & Security",
+        desc: "Dedicated concierge for local temple darshan guidance, taxi booking, and guest assistance."
+      }
+    ]
+  },
+  guide: [
+    {
+      id: "ram-mandir",
+      name: "Shri Ram Janmabhoomi Mandir",
+      distance: "~15-20 Mins",
+      description: "The grand sacred temple complex of Bhagwan Shri Ram, conveniently accessible via the bypass corridor.",
+      type: "Pilgrimage"
+    },
+    {
+      id: "hanuman-garhi",
+      name: "Hanuman Garhi & Kanak Bhawan",
+      distance: "~15-20 Mins",
+      description: "Ancient spiritual heart of Ayodhya revered by devotees worldwide for divine blessings.",
+      type: "Pilgrimage"
+    },
+    {
+      id: "saryu-ghats",
+      name: "Saryu River Ghats & Maha Aarti",
+      distance: "~20 Mins",
+      description: "Experience the mesmerizing evening Saryu Aarti, holy dip, and tranquil riverside spirituality.",
+      type: "Cultural"
+    },
+    {
+      id: "ayodhya-airport",
+      name: "Maharishi Valmiki Airport (AYJ)",
+      distance: "~15 Mins",
+      description: "Effortless transit to and from Ayodhya International Airport along the smooth bypass road.",
+      type: "Transit"
+    }
+  ],
+  faqs: [
+    {
+      question: "How far is Hotel Swastika Inn from Shri Ram Janmabhoomi Mandir?",
+      answer: "Hotel Swastika Inn is located along the Muhavara Bypass corridor, providing a smooth 15 to 20 minute drive directly to the Shri Ram Janmabhoomi Mandir complex, avoiding heavy inner-city traffic."
+    },
+    {
+      question: "How far is the hotel from Ayodhya International Airport (AYJ) & Railway Station?",
+      answer: "The hotel is conveniently positioned approximately 15 minutes from Maharishi Valmiki International Airport (AYJ) and within 15–20 minutes of Ayodhya Dham Junction and Ayodhya Cantt Railway Station."
+    },
+    {
+      question: "What amenities are included in the guest rooms?",
+      answer: "All rooms include attached western bathrooms with instant hot water geysers, silent split air-conditioning, wall-mounted LED Smart TVs, comfortable beds with premium linens, daily housekeeping, and high-speed Wi-Fi."
+    },
+    {
+      question: "What is the capacity of the Banquet Hall and Celebration Lawn for events?",
+      answer: "Our Grand Indoor AC Banquet Hall accommodates 100 to 350+ guests, while our Royal Open-Air Celebration Lawn accommodates 200 to 700+ guests. Both venues are ideal for weddings, ring ceremonies, sangeets, birthday parties, and corporate events."
+    },
+    {
+      question: "Is there safe on-site parking for guests arriving by car or tourist bus?",
+      answer: "Yes, Hotel Swastika Inn features a wide private on-site courtyard parking area accommodating 50+ cars as well as traveller buses, with round-the-clock security and CCTV monitoring."
+    },
+    {
+      question: "What are the check-in and check-out timings?",
+      answer: "Standard check-in time is 12:00 PM and check-out time is 11:00 AM. Early check-in or late check-out can be requested subject to room availability."
+    }
+  ]
+};
