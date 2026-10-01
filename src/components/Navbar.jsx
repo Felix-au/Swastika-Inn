@@ -19,7 +19,6 @@ export default function Navbar({ onOpenBooking }) {
     { name: 'Banquet & Lawn', href: '#banquets' },
     { name: 'The Experience', href: '#experience' },
     { name: 'Ayodhya Guide', href: '#ayodhya' },
-    { name: 'FAQs', href: '#faqs' },
     { name: 'Location & Contact', href: '#contact' },
   ];
 
