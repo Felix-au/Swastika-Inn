@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Calendar, Users, Home, MapPin, Sparkles, MessageCircle, ArrowRight, ShieldCheck, Car, Droplets } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_INFO, ROOMS_DATA } from '../data/hotelData';
 
 export default function Hero({ onOpenBooking }) {
-  const [selectedRoom, setSelectedRoom] = useState(ROOMS_DATA[0].id);
+  const { content } = useHotelContent();
+  const heroData = content?.hero || {};
+  const hotelInfo = content?.settings || HOTEL_INFO;
+  const roomsList = content?.rooms || ROOMS_DATA;
+
+  const [selectedRoom, setSelectedRoom] = useState(roomsList[0]?.id || 'executive-king');
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState('2');
@@ -31,7 +37,7 @@ export default function Hero({ onOpenBooking }) {
       {/* Background Image with Warm Illuminated Facade */}
       <div className="hero-bg-container">
         <img 
-          src="/images/hero-facade-night.jpeg" 
+          src={heroData.backgroundImage || "/images/hero-facade-night.jpeg"} 
           alt="Hotel Swastika Inn Ayodhya Grand Illuminated Facade" 
           className="hero-bg-image"
         />
@@ -42,18 +48,18 @@ export default function Hero({ onOpenBooking }) {
         {/* Welcome Tag */}
         <div className="hero-badge animate-fade-in">
           <Sparkles size={15} className="hero-badge-icon" />
-          <span>Devotion • Luxury • Hospitality in Ayodhya Dham</span>
+          <span>{heroData.badge || "Devotion • Luxury • Hospitality in Ayodhya Dham"}</span>
         </div>
 
         {/* Main Title */}
         <h1 className="hero-title animate-slide-up">
-          Experience Serene Comfort &amp; <br />
-          <span className="gold-text">Grand Celebrations</span> at Swastika Inn
+          {heroData.titlePrefix || "Experience Serene Comfort &"} <br />
+          <span className="gold-text">{heroData.titleSuffix || "Grand Celebrations"}</span> at Swastika Inn
         </h1>
 
         {/* Subtitle */}
         <p className="hero-subtitle">
-          Located on the Muhavara Bypass, offering elegant air-conditioned suites, modern western bathrooms with hot water geysers, grand banquet halls, and sprawling celebration lawns.
+          {heroData.description || "Located on the Muhavara Bypass, offering elegant air-conditioned suites, modern western bathrooms with hot water geysers, grand banquet halls, and sprawling celebration lawns."}
         </p>
 
         {/* Hero Quick Action Buttons */}
@@ -67,7 +73,7 @@ export default function Hero({ onOpenBooking }) {
           </button>
 
           <a 
-            href={`https://wa.me/${HOTEL_INFO.whatsappNumber}?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20room%20availability%20at%20Hotel%20Swastika%20Inn.`}
+            href={`https://wa.me/${hotelInfo.whatsappNumber}?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20room%20availability%20at%20Hotel%20Swastika%20Inn.`}
             target="_blank" 
             rel="noopener noreferrer" 
             className="btn btn-whatsapp hero-btn"
@@ -124,7 +130,7 @@ export default function Hero({ onOpenBooking }) {
                 value={selectedRoom}
                 onChange={(e) => setSelectedRoom(e.target.value)}
               >
-                {ROOMS_DATA.map((room) => (
+                {roomsList.map((room) => (
                   <option key={room.id} value={room.id}>
                     {room.title}
                   </option>

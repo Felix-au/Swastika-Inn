@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Calendar, Menu, X } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_INFO } from '../data/hotelData';
 
-export default function Navbar({ onOpenBooking }) {
+export default function Navbar({ onOpenBooking, onOpenAdmin }) {
+  const { content } = useHotelContent();
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -50,12 +54,12 @@ export default function Navbar({ onOpenBooking }) {
         {/* Action CTAs */}
         <div className="navbar-actions">
           <a 
-            href={`tel:${HOTEL_INFO.phonePrimary}`} 
+            href={`tel:${hotelInfo.phonePrimary}`} 
             className="phone-quick-link" 
             title="Call Hotel Directly"
           >
             <Phone size={16} className="phone-icon" />
-            <span className="phone-text">{HOTEL_INFO.phoneDisplayPrimary}</span>
+            <span className="phone-text">{hotelInfo.phoneDisplayPrimary}</span>
           </a>
 
           <button 
@@ -93,11 +97,11 @@ export default function Navbar({ onOpenBooking }) {
             ))}
             <div className="mobile-cta-group">
               <a 
-                href={`tel:${HOTEL_INFO.phonePrimary}`} 
+                href={`tel:${hotelInfo.phonePrimary}`} 
                 className="btn btn-secondary mobile-phone-btn"
               >
                 <Phone size={16} />
-                <span>Call {HOTEL_INFO.phoneDisplayPrimary}</span>
+                <span>Call {hotelInfo.phoneDisplayPrimary}</span>
               </a>
               <button 
                 onClick={() => {
