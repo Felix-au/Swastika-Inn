@@ -232,3 +232,31 @@ export const AYODHYA_HIGHLIGHTS = [
     type: "Transit"
   }
 ];
+
+export const HOTEL_FAQS = [
+  {
+    question: "How far is Hotel Swastika Inn from Shri Ram Janmabhoomi Mandir?",
+    answer: "Hotel Swastika Inn is located along the Muhavara Bypass corridor, providing a hassle-free 15 to 20 minute drive directly to the Shri Ram Janmabhoomi Mandir complex, avoiding heavy inner-city traffic."
+  },
+  {
+    question: "How far is the hotel from Ayodhya International Airport (AYJ) & Railway Station?",
+    answer: "The hotel is conveniently positioned approximately 15 minutes from Maharishi Valmiki International Airport (AYJ) and within 15–20 minutes of Ayodhya Dham Junction and Ayodhya Cantt Railway Station."
+  },
+  {
+    question: "What amenities are included in the guest rooms?",
+    answer: "All rooms include attached western bathrooms with instant hot water geysers, silent split air-conditioning, wall-mounted LED Smart TVs, comfortable beds with premium linens, daily housekeeping, and high-speed Wi-Fi."
+  },
+  {
+    question: "What is the capacity of the Banquet Hall and Celebration Lawn for events?",
+    answer: "Our Grand Indoor AC Banquet Hall accommodates 100 to 350+ guests, while our Royal Open-Air Celebration Lawn accommodates 200 to 700+ guests. Both venues are ideal for weddings, ring ceremonies, sangeets, birthday parties, and corporate events."
+  },
+  {
+    question: "Is there safe on-site parking for guests arriving by car or tourist bus?",
+    answer: "Yes, Hotel Swastika Inn features a wide private on-site courtyard parking area accommodating 50+ cars as well as traveller buses, with round-the-clock security and CCTV monitoring."
+  },
+  {
+    question: "What are the check-in and check-out timings?",
+    answer: "Standard check-in time is 12:00 PM and check-out time is 11:00 AM. Early check-in or late check-out can be requested subject to room availability."
+  }
+];
+

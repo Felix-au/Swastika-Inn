@@ -5,6 +5,7 @@ import RoomsSection from './components/RoomsSection';
 import BanquetAndEvents from './components/BanquetAndEvents';
 import HotelExperience from './components/HotelExperience';
 import AyodhyaGuide from './components/AyodhyaGuide';
+import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import RoomDetailModal from './components/RoomDetailModal';
@@ -57,6 +58,9 @@ function App() {
 
         {/* Ayodhya Spiritual & Transit Distance Guide */}
         <AyodhyaGuide />
+
+        {/* Frequently Asked Questions (SEO & User Guide) */}
+        <FaqSection />
       </main>
 
       {/* Footer & Contact */}
