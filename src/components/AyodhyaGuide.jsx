@@ -1,8 +1,13 @@
 import React from 'react';
 import { MapPin, Navigation, Compass, ExternalLink, Clock } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { AYODHYA_HIGHLIGHTS, HOTEL_INFO } from '../data/hotelData';
 
 export default function AyodhyaGuide() {
+  const { content } = useHotelContent();
+  const guideList = content?.guide || AYODHYA_HIGHLIGHTS;
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   return (
     <section id="ayodhya" className="guide-section">
       <div className="container">
@@ -22,7 +27,7 @@ export default function AyodhyaGuide() {
 
         {/* Landmarks Grid */}
         <div className="landmarks-grid">
-          {AYODHYA_HIGHLIGHTS.map((place, index) => (
+          {guideList.map((place, index) => (
             <div key={index} className="landmark-card">
               <div className="landmark-top">
                 <span className="landmark-type">{place.type}</span>

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, Phone, MessageCircle } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_FAQS, HOTEL_INFO } from '../data/hotelData';
 
 export default function FaqSection() {
+  const { content } = useHotelContent();
+  const faqsList = content?.faqs || HOTEL_FAQS;
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggleFaq = (index) => {
@@ -28,7 +33,7 @@ export default function FaqSection() {
 
         {/* FAQ Accordion List */}
         <div className="faq-list-wrapper">
-          {HOTEL_FAQS.map((faq, idx) => {
+          {faqsList.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div 
@@ -75,14 +80,14 @@ export default function FaqSection() {
           </div>
           <div className="faq-cta-actions">
             <a 
-              href={`tel:${HOTEL_INFO.phonePrimary}`} 
+              href={`tel:${hotelInfo.phonePrimary}`} 
               className="faq-action-btn phone-btn"
             >
               <Phone size={16} />
               <span>Call Us Directly</span>
             </a>
             <a 
-              href={`https://wa.me/${HOTEL_INFO.whatsappNumber}?text=Namaste!%20I%20have%20a%20question%20about%20Hotel%20Swastika%20Inn.`}
+              href={`https://wa.me/${hotelInfo.whatsappNumber}?text=Namaste!%20I%20have%20a%20question%20about%20Hotel%20Swastika%20Inn.`}
               target="_blank"
               rel="noopener noreferrer"
               className="faq-action-btn wa-btn"

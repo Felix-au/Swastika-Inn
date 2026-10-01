@@ -1,8 +1,12 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ExternalLink, Lock } from 'lucide-react';
+import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_INFO } from '../data/hotelData';
 
-export default function Footer({ onOpenBooking }) {
+export default function Footer({ onOpenBooking, onOpenAdmin }) {
+  const { content } = useHotelContent();
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   return (
     <footer id="contact" className="site-footer">
       <div className="container">
@@ -23,7 +27,7 @@ export default function Footer({ onOpenBooking }) {
               <span>Book Your Stay</span>
             </button>
             <a 
-              href={`tel:${HOTEL_INFO.phonePrimary}`} 
+              href={`tel:${hotelInfo.phonePrimary}`} 
               className="btn btn-secondary"
             >
               <Phone size={15} />
@@ -53,11 +57,11 @@ export default function Footer({ onOpenBooking }) {
             <div className="check-times-box">
               <div className="check-time-item">
                 <Clock size={13} className="time-icon" />
-                <span>Check-in: <strong>{HOTEL_INFO.checkInTime}</strong></span>
+                <span>Check-in: <strong>{hotelInfo.checkInTime}</strong></span>
               </div>
               <div className="check-time-item">
                 <Clock size={13} className="time-icon" />
-                <span>Check-out: <strong>{HOTEL_INFO.checkOutTime}</strong></span>
+                <span>Check-out: <strong>{hotelInfo.checkOutTime}</strong></span>
               </div>
             </div>
           </div>
@@ -70,7 +74,7 @@ export default function Footer({ onOpenBooking }) {
                 <MapPin size={18} className="contact-icon" />
                 <div>
                   <strong>Address</strong>
-                  <p>{HOTEL_INFO.address}</p>
+                  <p>{hotelInfo.address}</p>
                 </div>
               </div>
               <div className="contact-item">
@@ -78,8 +82,8 @@ export default function Footer({ onOpenBooking }) {
                 <div>
                   <strong>Phone Numbers</strong>
                   <p>
-                    <a href={`tel:${HOTEL_INFO.phonePrimary}`}>{HOTEL_INFO.phoneDisplayPrimary}</a> <br />
-                    <a href={`tel:${HOTEL_INFO.phoneSecondary}`}>{HOTEL_INFO.phoneDisplaySecondary}</a>
+                    <a href={`tel:${hotelInfo.phonePrimary}`}>{hotelInfo.phoneDisplayPrimary}</a> <br />
+                    <a href={`tel:${hotelInfo.phoneSecondary}`}>{hotelInfo.phoneDisplaySecondary}</a>
                   </p>
                 </div>
               </div>
@@ -88,7 +92,7 @@ export default function Footer({ onOpenBooking }) {
                 <div>
                   <strong>Email Inquiry</strong>
                   <p>
-                    <a href={`mailto:${HOTEL_INFO.email}`}>{HOTEL_INFO.email}</a>
+                    <a href={`mailto:${hotelInfo.email}`}>{hotelInfo.email}</a>
                   </p>
                 </div>
               </div>
@@ -120,7 +124,7 @@ export default function Footer({ onOpenBooking }) {
               />
               <span className="qr-label">Scan to view or leave a Google Review</span>
               <a 
-                href={HOTEL_INFO.googleMapsUrl} 
+                href={hotelInfo.googleMapsUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="map-direction-link"
@@ -134,10 +138,22 @@ export default function Footer({ onOpenBooking }) {
 
         {/* Bottom Bar */}
         <div className="footer-bottom-bar">
-          <p>© {new Date().getFullYear()} Hotel Swastika Inn &amp; Banquet &amp; Lawn. All Rights Reserved.</p>
-          <p className="footer-location-tag">
-            Near Muhavara Bypass, Ayodhya Dham, U.P. 224123
-          </p>
+          <p>© 2026 Hotel Swastika Inn &amp; Banquet &amp; Lawn. All Rights Reserved.</p>
+          <div className="footer-bottom-links">
+            <span className="footer-location-tag">
+              Near Muhavara Bypass, Ayodhya Dham, U.P. 224123
+            </span>
+            {onOpenAdmin && (
+              <button 
+                onClick={onOpenAdmin} 
+                className="admin-studio-link-btn" 
+                title="Open CMS Studio & Live Preview"
+              >
+                <Lock size={12} />
+                <span>Manager Studio</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -357,6 +373,32 @@ export default function Footer({ onOpenBooking }) {
           color: #a89a8c;
           flex-wrap: wrap;
           gap: 1rem;
+        }
+
+        .footer-bottom-links {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+        }
+
+        .admin-studio-link-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: rgba(255, 255, 255, 0.05);
+          color: var(--gold-light);
+          border: 1px solid rgba(197, 155, 39, 0.3);
+          padding: 3px 10px;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: 0.2s;
+        }
+
+        .admin-studio-link-btn:hover {
+          background: rgba(197, 155, 39, 0.2);
+          border-color: var(--gold-primary);
         }
 
         @media (max-width: 1024px) {
