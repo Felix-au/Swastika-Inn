@@ -99,7 +99,13 @@ export function HotelProvider({ children }) {
     const isInsideIframe = window.self !== window.top;
     let tooltipEl = null;
 
-    /* Bi-directional preview sync initialized */
+    if (isInsideIframe) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.id = 'cms-connector-tooltip';
+      tooltipEl.className = 'cms-floating-tooltip';
+      tooltipEl.innerHTML = `<span class="cms-tooltip-icon">✎</span> <span class="cms-tooltip-text">Click to edit</span>`;
+      document.body.appendChild(tooltipEl);
+    }
 
     const formatTargetLabel = (key) => {
       if (!key) return 'Element';
@@ -341,14 +347,14 @@ export function HotelProvider({ children }) {
 
     window.addEventListener('message', handleMessage);
     window.addEventListener('dblclick', handleDblClick);
-    // mouseover
-    // mouseout
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
       window.removeEventListener('message', handleMessage);
       window.removeEventListener('dblclick', handleDblClick);
-      // rm mouseover
-      // rm mouseout
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
       if (tooltipEl && tooltipEl.parentNode) {
         tooltipEl.parentNode.removeChild(tooltipEl);
       }
