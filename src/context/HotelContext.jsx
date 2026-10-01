@@ -96,6 +96,17 @@ export function HotelProvider({ children }) {
   useEffect(() => {
     fetchLiveContent();
 
+    const isInsideIframe = window.self !== window.top;
+    let tooltipEl = null;
+
+    if (isInsideIframe) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.id = 'cms-connector-tooltip';
+      tooltipEl.className = 'cms-floating-tooltip';
+      tooltipEl.innerHTML = `<span class="cms-tooltip-icon">✎</span> <span class="cms-tooltip-text">Click to edit</span>`;
+      document.body.appendChild(tooltipEl);
+    }
+
     const formatTargetLabel = (key) => {
       if (!key) return 'Element';
       if (key === 'hero.badge') return 'Hero Eyebrow Badge';
@@ -162,6 +173,42 @@ export function HotelProvider({ children }) {
         return `Amenity Feature #${idx}`;
       }
       return key;
+    };
+
+    // Hover handler for smart connector tooltip
+    const handleMouseOver = (e) => {
+      if (!isInsideIframe || !tooltipEl) return;
+      const targetEl = e.target.closest('[data-cms-target]');
+      if (targetEl) {
+        const targetKey = targetEl.getAttribute('data-cms-target');
+        const label = formatTargetLabel(targetKey);
+        const rect = targetEl.getBoundingClientRect();
+
+        tooltipEl.querySelector('.cms-tooltip-text').textContent = `Double-click to edit ${label}`;
+        tooltipEl.style.display = 'flex';
+        
+        // Position smoothly relative to window
+        let topPos = rect.top + window.scrollY - 32;
+        if (topPos < window.scrollY + 10) topPos = rect.top + window.scrollY + 10;
+        let leftPos = rect.left + window.scrollX + 10;
+        if (leftPos + 220 > window.innerWidth) leftPos = window.innerWidth - 230;
+
+        tooltipEl.style.top = `${topPos}px`;
+        tooltipEl.style.left = `${leftPos}px`;
+
+        targetEl.classList.add('cms-hover-highlight');
+      }
+    };
+
+    const handleMouseOut = (e) => {
+      if (!isInsideIframe || !tooltipEl) return;
+      const targetEl = e.target.closest('[data-cms-target]');
+      if (targetEl) {
+        targetEl.classList.remove('cms-hover-highlight');
+      }
+      if (!e.relatedTarget || !e.relatedTarget.closest('[data-cms-target]')) {
+        tooltipEl.style.display = 'none';
+      }
     };
 
     // Listen for live preview postMessage events from the Admin CMS editor
@@ -300,7 +347,17 @@ export function HotelProvider({ children }) {
 
     window.addEventListener('message', handleMessage);
     window.addEventListener('dblclick', handleDblClick);
-    // tooltip cleanup
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      window.removeEventListener('dblclick', handleDblClick);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+      if (tooltipEl && tooltipEl.parentNode) {
+        tooltipEl.parentNode.removeChild(tooltipEl);
+      }
     };
   }, [fetchLiveContent]);
 
@@ -308,6 +365,39 @@ export function HotelProvider({ children }) {
     <HotelContext.Provider value={{ content, isLoading, isLivePreview, refreshContent: fetchLiveContent }}>
       {children}
       <style>{`
+        /* Floating Inspector Tooltip */
+        .cms-floating-tooltip {
+          position: absolute;
+          z-index: 999999;
+          display: none;
+          align-items: center;
+          gap: 6px;
+          background: rgba(22, 17, 10, 0.95);
+          color: #fce594;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          padding: 4px 10px;
+          border-radius: 9999px;
+          border: 1px solid rgba(245, 196, 67, 0.6);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(245, 196, 67, 0.35);
+          pointer-events: none;
+          white-space: nowrap;
+          backdrop-filter: blur(8px);
+          transition: opacity 0.2s ease, transform 0.2s ease;
+          animation: tooltipAppear 0.2s ease-out;
+        }
+
+        .cms-tooltip-icon {
+          color: #ffd768;
+          font-size: 12px;
+        }
+
+        @keyframes tooltipAppear {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Subtle Hover Outline in Preview */
         .cms-hover-highlight {
           outline: 2px dashed rgba(245, 196, 67, 0.65) !important;
@@ -316,55 +406,7 @@ export function HotelProvider({ children }) {
           transition: outline 0.15s ease !important;
         }
 
-        /* Radar Ping Wave on Active Element */
-        .cms-radar-ping {
-          position: relative !important;
-          animation: cmsRadarPulse 1.8s cubic-bezier(0, 0, 0.2, 1) !important;
-        }
-
-        @keyframes cmsRadarPulse {
-          0% {
-            box-shadow: 0 0 0 0 rgba(245, 196, 67, 0.8), 0 0 20px rgba(245, 196, 67, 0.5);
-          }
-          50% {
-            box-shadow: 0 0 0 16px rgba(245, 196, 67, 0.3), 0 0 35px rgba(245, 196, 67, 0.7);
-          }
-          100% {
-            box-shadow: 0 0 0 30px rgba(245, 196, 67, 0), 0 0 15px rgba(245, 196, 67, 0);
-          }
-        }
-          .cms-highlight-focus {
-          outline: 3px solid rgba(197, 155, 39, 0.85) !important;
-          outline-offset: -3px;
-          box-shadow: 0 0 30px rgba(197, 155, 39, 0.45) !important;
-          transition: outline 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Active Text Editing Glow in Live Preview */
-        .cms-active-text-glow {
-          outline: 3px dashed #f5c443 !important;
-          outline-offset: 5px !important;
-          background-color: rgba(245, 196, 67, 0.18) !important;
-          border-radius: 8px !important;
-          box-shadow: 0 0 25px rgba(245, 196, 67, 0.6) !important;
-          transition: all 0.3s ease !important;
-          animation: cmsPulseTextGlow 1.4s infinite alternate ease-in-out !important;
-        }
-
-        @keyframes cmsPulseTextGlow {
-          0% {
-            outline-color: #f5c443;
-            box-shadow: 0 0 15px rgba(245, 196, 67, 0.4);
-            background-color: rgba(245, 196, 67, 0.12);
-          }
-          100% {
-            outline-color: #ffd768;
-            box-shadow: 0 0 32px rgba(245, 196, 67, 0.75);
-            background-color: rgba(245, 196, 67, 0.24);
-          }
-        }
-
-        /* Active Image Squircle Editing in Live Preview */
+        /* Active Text Editing Glow */
         .cms-active-image-squircle {
           border-radius: 22px !important;
           outline: 4px solid #f5c443 !important;
