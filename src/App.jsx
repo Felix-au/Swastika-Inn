@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import RoomsSection from './components/RoomsSection';
@@ -9,10 +9,15 @@ import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import RoomDetailModal from './components/RoomDetailModal';
+import AdminDashboard from './admin/AdminDashboard';
+import { HotelProvider, useHotelContent } from './context/HotelContext';
 import { Phone, MessageCircle } from 'lucide-react';
 import { HOTEL_INFO } from './data/hotelData';
 
-function App() {
+function MainSiteContent({ onOpenAdmin }) {
+  const { content } = useHotelContent();
+  const hotelInfo = content?.settings || HOTEL_INFO;
+
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingInitialData, setBookingInitialData] = useState({});
   const [selectedRoomForDetail, setSelectedRoomForDetail] = useState(null);
@@ -37,7 +42,10 @@ function App() {
   return (
     <div className="hotel-app">
       {/* Navigation Header */}
-      <Navbar onOpenBooking={handleOpenBooking} />
+      <Navbar 
+        onOpenBooking={handleOpenBooking} 
+        onOpenAdmin={onOpenAdmin}
+      />
 
       {/* Main Content Sections */}
       <main>
@@ -64,7 +72,10 @@ function App() {
       </main>
 
       {/* Footer & Contact */}
-      <Footer onOpenBooking={handleOpenBooking} />
+      <Footer 
+        onOpenBooking={handleOpenBooking} 
+        onOpenAdmin={onOpenAdmin}
+      />
 
       {/* Booking & Reservation Modal */}
       <BookingModal 
@@ -83,7 +94,7 @@ function App() {
       {/* Floating Mobile Sticky Contact Bar */}
       <div className="floating-mobile-bar">
         <a 
-          href={`tel:${HOTEL_INFO.phonePrimary}`} 
+          href={`tel:${hotelInfo.phonePrimary}`} 
           className="floating-action-btn call-action"
         >
           <Phone size={18} />
@@ -91,7 +102,7 @@ function App() {
         </a>
 
         <a 
-          href={`https://wa.me/${HOTEL_INFO.whatsappNumber}?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20booking%20at%20Hotel%20Swastika%20Inn.`}
+          href={`https://wa.me/${hotelInfo.whatsappNumber}?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20booking%20at%20Hotel%20Swastika%20Inn.`}
           target="_blank"
           rel="noopener noreferrer"
           className="floating-action-btn wa-action"
@@ -176,6 +187,38 @@ function App() {
         }
       `}</style>
     </div>
+  );
+}
+
+function App() {
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+
+  useEffect(() => {
+    // Check URL query ?admin=true or #admin
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true' || window.location.hash === '#admin') {
+      setIsAdminOpen(true);
+    }
+
+    // Keyboard shortcut: Ctrl + Shift + A to open Admin Studio
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setIsAdminOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  return (
+    <HotelProvider>
+      <MainSiteContent onOpenAdmin={() => setIsAdminOpen(true)} />
+      {isAdminOpen && (
+        <AdminDashboard onClose={() => setIsAdminOpen(false)} />
+      )}
+    </HotelProvider>
   );
 }
 
