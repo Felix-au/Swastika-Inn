@@ -17,6 +17,9 @@ out/
 .env.test.local
 .env.production.local
 *.pem
+server/.env
+public/uploads/*
+!public/uploads/.gitkeep
 
 # Logs
 logs/
