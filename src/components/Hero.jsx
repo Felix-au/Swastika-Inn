@@ -33,32 +33,33 @@ export default function Hero({ onOpenBooking }) {
   const nights = calculateNights();
 
   return (
-    <section className="hero-section">
+    <section id="hero" className="hero-section">
       {/* Background Image with Warm Illuminated Facade */}
       <div className="hero-bg-container">
         <img 
           src={heroData.backgroundImage || "/images/hero-facade-night.jpeg"} 
           alt="Hotel Swastika Inn Ayodhya Grand Illuminated Facade" 
           className="hero-bg-image"
+          data-cms-target="hero.image"
         />
         <div className="hero-overlay"></div>
       </div>
 
       <div className="container hero-content">
         {/* Welcome Tag */}
-        <div className="hero-badge animate-fade-in">
+        <div className="hero-badge animate-fade-in" data-cms-target="hero.badge">
           <Sparkles size={15} className="hero-badge-icon" />
           <span>{heroData.badge || "Devotion • Luxury • Hospitality in Ayodhya Dham"}</span>
         </div>
 
         {/* Main Title */}
-        <h1 className="hero-title animate-slide-up">
+        <h1 className="hero-title animate-slide-up" data-cms-target="hero.title">
           {heroData.titlePrefix || "Experience Serene Comfort &"} <br />
           <span className="gold-text">{heroData.titleSuffix || "Grand Celebrations"}</span> at Swastika Inn
         </h1>
 
         {/* Subtitle */}
-        <p className="hero-subtitle">
+        <p className="hero-subtitle" data-cms-target="hero.description">
           {heroData.description || "Located on the Muhavara Bypass, offering elegant air-conditioned suites, modern western bathrooms with hot water geysers, grand banquet halls, and sprawling celebration lawns."}
         </p>
 
@@ -182,23 +183,34 @@ export default function Hero({ onOpenBooking }) {
         </div>
 
         {/* Trust Badges */}
-        <div className="hero-trust-row">
-          <div className="trust-item">
-            <MapPin size={15} className="trust-icon" />
-            <span>Muhavara Bypass Corridor</span>
-          </div>
-          <div className="trust-item">
-            <Droplets size={15} className="trust-icon" />
-            <span>Attached Baths &amp; Geysers</span>
-          </div>
-          <div className="trust-item">
-            <Car size={15} className="trust-icon" />
-            <span>Spacious Courtyard Parking</span>
-          </div>
-          <div className="trust-item">
-            <ShieldCheck size={15} className="trust-icon" />
-            <span>24/7 Front Desk &amp; Security</span>
-          </div>
+        <div className="hero-trust-row" data-cms-target="hero.badges">
+          {heroData.badges && heroData.badges.length > 0 ? (
+            heroData.badges.map((b, idx) => (
+              <div key={idx} className="trust-item">
+                <ShieldCheck size={15} className="trust-icon" />
+                <span>{b.text}</span>
+              </div>
+            ))
+          ) : (
+            <>
+              <div className="trust-item">
+                <MapPin size={15} className="trust-icon" />
+                <span>Muhavara Bypass Corridor</span>
+              </div>
+              <div className="trust-item">
+                <Droplets size={15} className="trust-icon" />
+                <span>Attached Baths &amp; Geysers</span>
+              </div>
+              <div className="trust-item">
+                <Car size={15} className="trust-icon" />
+                <span>Spacious Courtyard Parking</span>
+              </div>
+              <div className="trust-item">
+                <ShieldCheck size={15} className="trust-icon" />
+                <span>24/7 Front Desk &amp; Security</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
