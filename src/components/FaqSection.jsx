@@ -39,6 +39,7 @@ export default function FaqSection() {
               <div 
                 key={idx} 
                 className={`faq-card ${isOpen ? 'active' : ''}`}
+                data-cms-target={`faqs.${idx}`}
               >
                 <button
                   className="faq-question-btn"
@@ -47,7 +48,7 @@ export default function FaqSection() {
                   aria-controls={`faq-answer-${idx}`}
                   id={`faq-btn-${idx}`}
                 >
-                  <span className="faq-q-text">{faq.question}</span>
+                  <span className="faq-q-text" data-cms-target={`faqs.${idx}.q`}>{faq.question}</span>
                   <span className={`faq-chevron-icon ${isOpen ? 'rotate' : ''}`}>
                     <ChevronDown size={20} />
                   </span>
@@ -64,7 +65,7 @@ export default function FaqSection() {
                   }}
                 >
                   <div className="faq-answer-inner">
-                    <p>{faq.answer}</p>
+                    <p data-cms-target={`faqs.${idx}.a`}>{faq.answer}</p>
                   </div>
                 </div>
               </div>
