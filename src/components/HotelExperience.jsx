@@ -9,7 +9,11 @@ import {
   CheckCircle2 
 } from 'lucide-react';
 
+import { useHotelContent } from '../context/HotelContext';
+
 export default function HotelExperience() {
+  const { content } = useHotelContent();
+  const experienceData = content?.experience || {};
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -97,11 +101,13 @@ export default function HotelExperience() {
             <Award size={14} />
             <span>The Swastika Experience</span>
           </div>
-          <h2 className="section-title">
-            Crafted For <span>Devotees, Travelers &amp; Families</span>
+          <h2 className="section-title" data-cms-target="experience.heading">
+            {experienceData.heading || (
+              <>Crafted For <span>Devotees, Travelers &amp; Families</span></>
+            )}
           </h2>
-          <p className="section-desc">
-            We blend the spiritual tranquility of Ayodhya with contemporary hotel amenities, ensuring your stay is peaceful, seamless, and dignified.
+          <p className="section-desc" data-cms-target="experience.subheading">
+            {experienceData.subheading || "We blend the spiritual tranquility of Ayodhya with contemporary hotel amenities, ensuring your stay is peaceful, seamless, and dignified."}
           </p>
         </div>
 
@@ -143,6 +149,7 @@ export default function HotelExperience() {
                   role={status === 'center' ? 'region' : 'button'}
                   tabIndex={status === 'center' ? 0 : -1}
                   aria-label={item.title}
+                  data-cms-target={`experience.${index}`}
                 >
                   {/* Image Header with Stat Badge */}
                   <div className="card-img-wrap">
@@ -151,6 +158,7 @@ export default function HotelExperience() {
                       alt={item.title} 
                       className="card-img"
                       loading="lazy"
+                      data-cms-target={`experience.${index}.image`}
                     />
                     <div className="card-stat-pill">
                       <Icon size={14} />
@@ -162,8 +170,8 @@ export default function HotelExperience() {
                   {/* Body Content */}
                   <div className="card-body">
                     <div className="card-tag">{item.tag}</div>
-                    <h3 className="card-title">{item.title}</h3>
-                    <p className="card-desc">{item.description}</p>
+                    <h3 className="card-title" data-cms-target={`experience.${index}.title`}>{item.title}</h3>
+                    <p className="card-desc" data-cms-target={`experience.${index}.desc`}>{item.description}</p>
 
                     <div className="card-bullets">
                       {item.bullets.map((bullet, i) => (
