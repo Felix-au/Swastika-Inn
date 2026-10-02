@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { getApiUrl } from '../config/api';
 import { 
   HOTEL_INFO, 
   ROOMS_DATA, 
@@ -73,7 +74,7 @@ export function HotelProvider({ children }) {
 
   const fetchLiveContent = useCallback(async () => {
     try {
-      const res = await fetch('/api/content');
+      const res = await fetch(getApiUrl('/api/content'));
       if (res.ok) {
         const json = await res.json();
         if (json.success && json.data) {

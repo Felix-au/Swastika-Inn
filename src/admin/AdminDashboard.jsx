@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { getApiUrl } from '../config/api';
 import { 
   Save, 
   Upload, 
@@ -111,7 +112,7 @@ export default function AdminDashboard({ onClose }) {
   // Fetch draft data from server
   const fetchDraft = useCallback(async (authToken) => {
     try {
-      const res = await fetch('/api/admin/draft', {
+      const res = await fetch(getApiUrl('/api/admin/draft'), {
         headers: { Authorization: `Bearer ${authToken}` }
       });
       if (res.ok) {
@@ -191,7 +192,7 @@ export default function AdminDashboard({ onClose }) {
     setIsLoggingIn(true);
     setAuthError('');
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(getApiUrl('/api/auth/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: passwordInput })
@@ -237,7 +238,7 @@ export default function AdminDashboard({ onClose }) {
 
     try {
       setIsUploading(true);
-      const res = await fetch('/api/media/upload', {
+      const res = await fetch(getApiUrl('/api/media/upload'), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: formData
@@ -264,7 +265,7 @@ export default function AdminDashboard({ onClose }) {
     setIsPublishing(true);
     try {
       // First save current draft to backend
-      await fetch('/api/admin/draft', {
+      await fetch(getApiUrl('/api/admin/draft'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -274,7 +275,7 @@ export default function AdminDashboard({ onClose }) {
       });
 
       // Now publish
-      const res = await fetch('/api/admin/publish', {
+      const res = await fetch(getApiUrl('/api/admin/publish'), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -297,7 +298,7 @@ export default function AdminDashboard({ onClose }) {
   const handleDiscard = async () => {
     if (!confirm('Discard all unsaved edits and revert back to live content?')) return;
     try {
-      const res = await fetch('/api/admin/discard', {
+      const res = await fetch(getApiUrl('/api/admin/discard'), {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
