@@ -28,17 +28,17 @@ export default function AyodhyaGuide() {
         {/* Landmarks Grid */}
         <div className="landmarks-grid">
           {guideList.map((place, index) => (
-            <div key={index} className="landmark-card">
+            <div key={index} className="landmark-card" data-cms-target={`guide.${index}`}>
               <div className="landmark-top">
                 <span className="landmark-type">{place.type}</span>
-                <span className="landmark-distance">
+                <span className="landmark-distance" data-cms-target={`guide.${index}.distance`}>
                   <Clock size={13} />
                   <span>{place.distance}</span>
                 </span>
               </div>
 
-              <h3 className="landmark-name">{place.name}</h3>
-              <p className="landmark-desc">{place.description}</p>
+              <h3 className="landmark-name" data-cms-target={`guide.${index}.name`}>{place.name}</h3>
+              <p className="landmark-desc" data-cms-target={`guide.${index}.desc`}>{place.description}</p>
 
               <div className="landmark-footer">
                 <MapPin size={14} className="pin-icon" />
