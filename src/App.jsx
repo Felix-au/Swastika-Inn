@@ -14,7 +14,7 @@ import { HotelProvider, useHotelContent } from './context/HotelContext';
 import { Phone, MessageCircle } from 'lucide-react';
 import { HOTEL_INFO } from './data/hotelData';
 
-function MainSiteContent({ onOpenAdmin }) {
+function MainSiteContent() {
   const { content } = useHotelContent();
   const hotelInfo = content?.settings || HOTEL_INFO;
 
@@ -42,10 +42,7 @@ function MainSiteContent({ onOpenAdmin }) {
   return (
     <div className="hotel-app">
       {/* Navigation Header */}
-      <Navbar 
-        onOpenBooking={handleOpenBooking} 
-        onOpenAdmin={onOpenAdmin}
-      />
+      <Navbar onOpenBooking={handleOpenBooking} />
 
       {/* Main Content Sections */}
       <main>
@@ -72,10 +69,7 @@ function MainSiteContent({ onOpenAdmin }) {
       </main>
 
       {/* Footer & Contact */}
-      <Footer 
-        onOpenBooking={handleOpenBooking} 
-        onOpenAdmin={onOpenAdmin}
-      />
+      <Footer onOpenBooking={handleOpenBooking} />
 
       {/* Booking & Reservation Modal */}
       <BookingModal 
@@ -87,6 +81,7 @@ function MainSiteContent({ onOpenAdmin }) {
       {/* Room Detail & Bathroom Gallery Modal */}
       <RoomDetailModal 
         room={selectedRoomForDetail}
+        roomIndex={(content?.rooms || []).findIndex(r => r.id === selectedRoomForDetail?.id)}
         onClose={handleCloseRoomDetail}
         onOpenBooking={handleOpenBooking}
       />
@@ -194,11 +189,23 @@ function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   useEffect(() => {
-    // Check URL query ?admin=true or #admin
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('admin') === 'true' || window.location.hash === '#admin') {
-      setIsAdminOpen(true);
-    }
+    const checkAdminRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const urlParams = new URLSearchParams(window.location.search);
+      if (
+        path === '/admin' || 
+        path === '/admin/' || 
+        urlParams.get('admin') === 'true' || 
+        window.location.hash === '#admin'
+      ) {
+        setIsAdminOpen(true);
+      } else {
+        setIsAdminOpen(false);
+      }
+    };
+
+    checkAdminRoute();
+    window.addEventListener('popstate', checkAdminRoute);
 
     // Keyboard shortcut: Ctrl + Shift + A to open Admin Studio
     const handleKeyDown = (e) => {
@@ -209,14 +216,24 @@ function App() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', checkAdminRoute);
+    };
   }, []);
+
+  const handleCloseAdmin = () => {
+    setIsAdminOpen(false);
+    if (window.location.pathname.startsWith('/admin') || window.location.search.includes('admin') || window.location.hash === '#admin') {
+      window.history.pushState(null, '', '/');
+    }
+  };
 
   return (
     <HotelProvider>
-      <MainSiteContent onOpenAdmin={() => setIsAdminOpen(true)} />
+      <MainSiteContent />
       {isAdminOpen && (
-        <AdminDashboard onClose={() => setIsAdminOpen(false)} />
+        <AdminDashboard onClose={handleCloseAdmin} />
       )}
     </HotelProvider>
   );
