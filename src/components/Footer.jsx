@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Clock, ExternalLink, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
 import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_INFO } from '../data/hotelData';
 
@@ -144,9 +144,6 @@ export default function Footer({ onOpenBooking }) {
             <span className="footer-location-tag">
               Near Muhavara Bypass, Ayodhya Dham, U.P. 224123
             </span>
-            <a href="/admin" className="staff-portal-link" title="Manager Studio Portal">
-              <Lock size={12} /> Staff Studio
-            </a>
           </div>
         </div>
       </div>
@@ -400,26 +397,6 @@ export default function Footer({ onOpenBooking }) {
             flex-direction: column;
             text-align: center;
           }
-        }
-
-        .staff-portal-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          color: rgba(255, 255, 255, 0.45);
-          font-size: 0.75rem;
-          text-decoration: none;
-          padding: 3px 8px;
-          border-radius: 4px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          transition: all 0.2s ease;
-          margin-left: 0.75rem;
-        }
-
-        .staff-portal-link:hover {
-          color: var(--gold-light);
-          border-color: rgba(197, 155, 39, 0.5);
-          background: rgba(197, 155, 39, 0.1);
         }
       `}</style>
     </footer>
