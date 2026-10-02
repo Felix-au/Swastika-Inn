@@ -406,7 +406,55 @@ export function HotelProvider({ children }) {
           transition: outline 0.15s ease !important;
         }
 
-        /* Active Text Editing Glow */
+        /* Radar Ping Wave on Active Element */
+        .cms-radar-ping {
+          position: relative !important;
+          animation: cmsRadarPulse 1.8s cubic-bezier(0, 0, 0.2, 1) !important;
+        }
+
+        @keyframes cmsRadarPulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(245, 196, 67, 0.8), 0 0 20px rgba(245, 196, 67, 0.5);
+          }
+          50% {
+            box-shadow: 0 0 0 16px rgba(245, 196, 67, 0.3), 0 0 35px rgba(245, 196, 67, 0.7);
+          }
+          100% {
+            box-shadow: 0 0 0 30px rgba(245, 196, 67, 0), 0 0 15px rgba(245, 196, 67, 0);
+          }
+        }
+          .cms-highlight-focus {
+          outline: 3px solid rgba(197, 155, 39, 0.85) !important;
+          outline-offset: -3px;
+          box-shadow: 0 0 30px rgba(197, 155, 39, 0.45) !important;
+          transition: outline 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Active Text Editing Glow in Live Preview */
+        .cms-active-text-glow {
+          outline: 3px dashed #f5c443 !important;
+          outline-offset: 5px !important;
+          background-color: rgba(245, 196, 67, 0.18) !important;
+          border-radius: 8px !important;
+          box-shadow: 0 0 25px rgba(245, 196, 67, 0.6) !important;
+          transition: all 0.3s ease !important;
+          animation: cmsPulseTextGlow 1.4s infinite alternate ease-in-out !important;
+        }
+
+        @keyframes cmsPulseTextGlow {
+          0% {
+            outline-color: #f5c443;
+            box-shadow: 0 0 15px rgba(245, 196, 67, 0.4);
+            background-color: rgba(245, 196, 67, 0.12);
+          }
+          100% {
+            outline-color: #ffd768;
+            box-shadow: 0 0 32px rgba(245, 196, 67, 0.75);
+            background-color: rgba(245, 196, 67, 0.24);
+          }
+        }
+
+        /* Active Image Squircle Editing in Live Preview */
         .cms-active-image-squircle {
           border-radius: 22px !important;
           outline: 4px solid #f5c443 !important;
