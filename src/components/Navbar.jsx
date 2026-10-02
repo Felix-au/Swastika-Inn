@@ -35,10 +35,11 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }) {
             src="/images/logo-icon.jpeg" 
             alt="Hotel Swastika Inn Logo" 
             className="brand-logo-img"
+            data-cms-target="settings.logo"
           />
           <div className="brand-text">
-            <span className="brand-name">SWASTIKA INN</span>
-            <span className="brand-sub">HOTEL • BANQUET • LAWN</span>
+            <span className="brand-name" data-cms-target="settings.hotelName">SWASTIKA INN</span>
+            <span className="brand-sub" data-cms-target="settings.subtitle">HOTEL • BANQUET • LAWN</span>
           </div>
         </a>
 
@@ -57,6 +58,7 @@ export default function Navbar({ onOpenBooking, onOpenAdmin }) {
             href={`tel:${hotelInfo.phonePrimary}`} 
             className="phone-quick-link" 
             title="Call Hotel Directly"
+            data-cms-target="settings.phone"
           >
             <Phone size={16} className="phone-icon" />
             <span className="phone-text">{hotelInfo.phoneDisplayPrimary}</span>
