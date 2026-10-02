@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { X, Bed, Users, Droplets, CheckCircle2, Calendar, Phone } from 'lucide-react';
 import { HOTEL_INFO } from '../data/hotelData';
 
-export default function RoomDetailModal({ room, onClose, onOpenBooking }) {
+export default function RoomDetailModal({ room, roomIndex = 0, onClose, onOpenBooking }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   if (!room) return null;
 
+  const targetIndex = roomIndex >= 0 ? roomIndex : 0;
   const images = room.gallery && room.gallery.length > 0 
     ? room.gallery 
     : [room.heroImage];
@@ -28,6 +29,7 @@ export default function RoomDetailModal({ room, onClose, onOpenBooking }) {
                 src={images[activeImageIndex]} 
                 alt={`${room.title} view`} 
                 className="main-display-img"
+                data-cms-target={`rooms.${targetIndex}.image`}
               />
               <div className="gallery-counter">
                 Photo {activeImageIndex + 1} of {images.length}
@@ -35,7 +37,7 @@ export default function RoomDetailModal({ room, onClose, onOpenBooking }) {
             </div>
 
             {/* Thumbnail Strip */}
-            <div className="thumb-strip">
+            <div className="thumb-strip" data-cms-target={`rooms.${targetIndex}.gallery`}>
               {images.map((img, idx) => (
                 <button
                   key={idx}
@@ -50,15 +52,15 @@ export default function RoomDetailModal({ room, onClose, onOpenBooking }) {
 
           {/* Details & Specs */}
           <div className="room-modal-info">
-            <div className="modal-tag">{room.category} Accommodations</div>
-            <h3 className="modal-title">{room.title}</h3>
+            <div className="modal-tag" data-cms-target={`rooms.${targetIndex}.tag`}>{room.category} Accommodations</div>
+            <h3 className="modal-title" data-cms-target={`rooms.${targetIndex}.title`}>{room.title}</h3>
             
             <div className="modal-quick-specs">
-              <div className="spec-pill">
+              <div className="spec-pill" data-cms-target={`rooms.${targetIndex}.bed`}>
                 <Bed size={15} />
                 <span>{room.bedType}</span>
               </div>
-              <div className="spec-pill">
+              <div className="spec-pill" data-cms-target={`rooms.${targetIndex}.capacity`}>
                 <Users size={15} />
                 <span>{room.capacity}</span>
               </div>
@@ -67,11 +69,11 @@ export default function RoomDetailModal({ room, onClose, onOpenBooking }) {
               </div>
             </div>
 
-            <p className="modal-description">{room.description}</p>
+            <p className="modal-description" data-cms-target={`rooms.${targetIndex}.desc`}>{room.description}</p>
 
             {/* Bathroom Highlight Box */}
             {room.bathroom && (
-              <div className="bathroom-highlight-card">
+              <div className="bathroom-highlight-card" data-cms-target={`rooms.${targetIndex}.bath`}>
                 <div className="bath-card-header">
                   <Droplets size={16} className="bath-icon" />
                   <strong>Attached Private Bathroom</strong>
