@@ -27,8 +27,8 @@ export default function BanquetAndEvents({ onOpenBooking }) {
 
         {/* Venues Showcase Cards */}
         <div className="venues-grid">
-          {venuesList.map((venue) => (
-            <div key={venue.id} className="venue-card">
+          {venuesList.map((venue, index) => (
+            <div key={venue.id} className="venue-card" data-cms-target={`banquets.${index}`}>
               {/* Dual Image Preview */}
               <div className="venue-images-wrap">
                 <div className="venue-main-img-box">
@@ -37,8 +37,9 @@ export default function BanquetAndEvents({ onOpenBooking }) {
                     alt={venue.title} 
                     className="venue-img-main"
                     loading="lazy"
+                    data-cms-target={`banquets.${index}.image`}
                   />
-                  <div className="venue-capacity-badge">
+                  <div className="venue-capacity-badge" data-cms-target={`banquets.${index}.capacity`}>
                     <Users size={14} />
                     <span>{venue.capacity}</span>
                   </div>
@@ -49,19 +50,20 @@ export default function BanquetAndEvents({ onOpenBooking }) {
                     alt={`${venue.title} setup`} 
                     className="venue-img-sub"
                     loading="lazy"
+                    data-cms-target={`banquets.${index}.secondaryImage`}
                   />
                 </div>
               </div>
 
               {/* Venue Details */}
               <div className="venue-content">
-                <div className="venue-best-for">
+                <div className="venue-best-for" data-cms-target={`banquets.${index}.bestFor`}>
                   <Sparkles size={13} className="venue-sparkle-icon" />
                   <span>{venue.bestFor}</span>
                 </div>
 
-                <h3 className="venue-title">{venue.title}</h3>
-                <p className="venue-desc">{venue.description}</p>
+                <h3 className="venue-title" data-cms-target={`banquets.${index}.title`}>{venue.title}</h3>
+                <p className="venue-desc" data-cms-target={`banquets.${index}.desc`}>{venue.description}</p>
 
                 {/* Features Checklist */}
                 <div className="venue-features-grid">
@@ -97,7 +99,7 @@ export default function BanquetAndEvents({ onOpenBooking }) {
         </div>
 
         {/* Celebration Highlights Banner */}
-        <div className="events-catering-banner">
+        <div className="events-catering-banner" data-cms-target="banquets.banner">
           <div className="catering-content">
             <div className="catering-tag">Catering &amp; Decor Solutions</div>
             <h3 className="catering-title">Turnkey Wedding &amp; Party Planning</h3>
