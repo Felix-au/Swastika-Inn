@@ -1,9 +1,9 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Clock, ExternalLink, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
 import { useHotelContent } from '../context/HotelContext';
 import { HOTEL_INFO } from '../data/hotelData';
 
-export default function Footer({ onOpenBooking, onOpenAdmin }) {
+export default function Footer({ onOpenBooking }) {
   const { content } = useHotelContent();
   const hotelInfo = content?.settings || HOTEL_INFO;
 
@@ -45,16 +45,17 @@ export default function Footer({ onOpenBooking, onOpenAdmin }) {
                 src="/images/logo-icon.jpeg" 
                 alt="Hotel Swastika Inn" 
                 className="footer-logo"
+                data-cms-target="settings.logo"
               />
               <div>
-                <h4 className="footer-brand-title">SWASTIKA INN</h4>
-                <span className="footer-brand-subtitle">ROOMS • BANQUET • LAWN</span>
+                <h4 className="footer-brand-title" data-cms-target="settings.hotelName">SWASTIKA INN</h4>
+                <span className="footer-brand-subtitle" data-cms-target="settings.subtitle">ROOMS • BANQUET • LAWN</span>
               </div>
             </div>
             <p className="footer-about">
               A premium destination in Ayodhya Dham providing comfortable AC guest suites, modern attached western baths, full banquet facilities, and lush lawns along Muhavara Bypass.
             </p>
-            <div className="check-times-box">
+            <div className="check-times-box" data-cms-target="settings.timings">
               <div className="check-time-item">
                 <Clock size={13} className="time-icon" />
                 <span>Check-in: <strong>{hotelInfo.checkInTime}</strong></span>
@@ -70,14 +71,14 @@ export default function Footer({ onOpenBooking, onOpenAdmin }) {
           <div className="footer-col">
             <h5 className="footer-heading">Contact &amp; Location</h5>
             <div className="footer-contact-list">
-              <div className="contact-item">
+              <div className="contact-item" data-cms-target="settings.address">
                 <MapPin size={18} className="contact-icon" />
                 <div>
                   <strong>Address</strong>
                   <p>{hotelInfo.address}</p>
                 </div>
               </div>
-              <div className="contact-item">
+              <div className="contact-item" data-cms-target="settings.phone">
                 <Phone size={18} className="contact-icon" />
                 <div>
                   <strong>Phone Numbers</strong>
@@ -87,7 +88,7 @@ export default function Footer({ onOpenBooking, onOpenAdmin }) {
                   </p>
                 </div>
               </div>
-              <div className="contact-item">
+              <div className="contact-item" data-cms-target="settings.email">
                 <Mail size={18} className="contact-icon" />
                 <div>
                   <strong>Email Inquiry</strong>
@@ -143,16 +144,6 @@ export default function Footer({ onOpenBooking, onOpenAdmin }) {
             <span className="footer-location-tag">
               Near Muhavara Bypass, Ayodhya Dham, U.P. 224123
             </span>
-            {onOpenAdmin && (
-              <button 
-                onClick={onOpenAdmin} 
-                className="admin-studio-link-btn" 
-                title="Open CMS Studio & Live Preview"
-              >
-                <Lock size={12} />
-                <span>Manager Studio</span>
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -379,26 +370,6 @@ export default function Footer({ onOpenBooking, onOpenAdmin }) {
           display: flex;
           align-items: center;
           gap: 1.25rem;
-        }
-
-        .admin-studio-link-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.35rem;
-          background: rgba(255, 255, 255, 0.05);
-          color: var(--gold-light);
-          border: 1px solid rgba(197, 155, 39, 0.3);
-          padding: 3px 10px;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .admin-studio-link-btn:hover {
-          background: rgba(197, 155, 39, 0.2);
-          border-color: var(--gold-primary);
         }
 
         @media (max-width: 1024px) {
