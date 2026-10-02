@@ -585,7 +585,95 @@ export default function AdminDashboard({ onClose }) {
           {saveNotice && <span className="save-notice-text">{saveNotice}</span>}
         </div>
 
-        {/* Quick Omni-Connector Placeholder */}
+        {/* Quick Omni-Connector Selector */}
+        <div className="omni-connector-selector" title="Directly jump and link to any element">
+          <Compass size={14} className="omni-icon" />
+          <select 
+            className="omni-select"
+            onChange={(e) => {
+              const val = e.target.value;
+              if (!val) return;
+              const [section, targetKey, isImgStr] = val.split('|');
+              const isImage = isImgStr === 'img';
+              setActiveSection(section);
+              sendFocusToPreview(targetKey, isImage);
+              setTimeout(() => {
+                let el = document.querySelector(`[data-editor-target="${targetKey}"]`);
+                if (!el && targetKey) {
+                  const parts = targetKey.split('.');
+                  if (parts.length > 2) {
+                    el = document.querySelector(`[data-editor-target="${parts[0]}.${parts[1]}"]`);
+                  }
+                }
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  if (typeof el.focus === 'function') el.focus();
+                  el.classList.remove('cms-editor-highlight-flash');
+                  void el.offsetWidth;
+                  el.classList.add('cms-editor-highlight-flash');
+                  setTimeout(() => el.classList.remove('cms-editor-highlight-flash'), 2200);
+                }
+              }, 150);
+              e.target.value = '';
+            }}
+            defaultValue=""
+          >
+            <option value="" disabled>⚡ Jump to Element...</option>
+            <optgroup label="🌟 Hero Welcome Banner">
+              <option value="hero|hero.badge|txt">Hero Eyebrow Badge</option>
+              <option value="hero|hero.title|txt">Hero Main Title</option>
+              <option value="hero|hero.description|txt">Hero Subtitle</option>
+              <option value="hero|hero.image|img">Hero Night Facade Photo</option>
+              <option value="hero|hero.badges|txt">Hero Verified Badges</option>
+            </optgroup>
+            <optgroup label="🛏️ Guest Rooms & Suites">
+              {draftData.rooms?.map((room, rIdx) => (
+                <React.Fragment key={rIdx}>
+                  <option value={`rooms|rooms.${rIdx}.title|txt`}>Room #{rIdx + 1}: {room.title} (Title)</option>
+                  <option value={`rooms|rooms.${rIdx}.image|img`}>Room #{rIdx + 1}: {room.title} (Cover Photo)</option>
+                  <option value={`rooms|rooms.${rIdx}.bed|txt`}>Room #{rIdx + 1}: Bed &amp; Capacity</option>
+                  <option value={`rooms|rooms.${rIdx}.bath|txt`}>Room #{rIdx + 1}: Attached Bath</option>
+                </React.Fragment>
+              ))}
+            </optgroup>
+            <optgroup label="🏛️ Banquets & Celebration Lawn">
+              {draftData.banquets?.map((venue, vIdx) => (
+                <React.Fragment key={vIdx}>
+                  <option value={`banquets|banquets.${vIdx}.title|txt`}>Venue #{vIdx + 1}: {venue.title}</option>
+                  <option value={`banquets|banquets.${vIdx}.image|img`}>Venue #{vIdx + 1}: Photo</option>
+                  <option value={`banquets|banquets.${vIdx}.capacity|txt`}>Venue #{vIdx + 1}: Capacity</option>
+                </React.Fragment>
+              ))}
+              <option value="banquets|banquets.banner|txt">Turnkey Wedding &amp; Catering Banner</option>
+            </optgroup>
+            <optgroup label="✨ Hotel Experience & Amenities">
+              <option value="experience|experience.heading|txt">Amenities Section Heading</option>
+              <option value="experience|experience.subheading|txt">Amenities Subtitle</option>
+              <option value="experience|experience.0|txt">Feature #1: Grand Lobby &amp; 24/7 Desk</option>
+              <option value="experience|experience.1|txt">Feature #2: Courtyard Parking</option>
+              <option value="experience|experience.2|txt">Feature #3: Attached Western Bath</option>
+            </optgroup>
+            <optgroup label="🗺️ Ayodhya Pilgrimage Guide">
+              {draftData.guide?.map((item, gIdx) => (
+                <option key={gIdx} value={`guide|guide.${gIdx}.name|txt`}>Landmark #{gIdx + 1}: {item.name}</option>
+              ))}
+            </optgroup>
+            <optgroup label="❓ Frequently Asked Questions">
+              {draftData.faqs?.map((faq, fIdx) => (
+                <option key={fIdx} value={`faqs|faqs.${fIdx}.q|txt`}>FAQ #{fIdx + 1}: {faq.question.slice(0, 30)}...</option>
+              ))}
+            </optgroup>
+            <optgroup label="⚙️ Hotel Settings & Contact Info">
+              <option value="settings|settings.hotelName|txt">Hotel Name &amp; Brand</option>
+              <option value="settings|settings.phone|txt">Primary Reception Phone</option>
+              <option value="settings|settings.phoneSecondary|txt">Secondary Phone</option>
+              <option value="settings|settings.whatsapp|txt">WhatsApp Booking Desk</option>
+              <option value="settings|settings.email|txt">Inquiry Email Address</option>
+              <option value="settings|settings.address|txt">Full Physical Address</option>
+              <option value="settings|settings.timings|txt">Check-in / Check-out Times</option>
+            </optgroup>
+          </select>
+        </div>
 
         {/* Viewport Toggles for Preview */}
         <div className="preview-device-selector">
@@ -2709,7 +2797,54 @@ export default function AdminDashboard({ onClose }) {
           }
         }
 
-        `}</style>
+        /* Omni-Connector Quick Jump Dropdown */
+        .omni-connector-selector {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          background: rgba(245, 196, 67, 0.1);
+          border: 1px solid rgba(245, 196, 67, 0.35);
+          border-radius: 9999px;
+          padding: 0.25rem 0.75rem 0.25rem 0.6rem;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+          transition: all 0.2s ease;
+        }
+
+        .omni-connector-selector:hover,
+        .omni-connector-selector:focus-within {
+          background: rgba(245, 196, 67, 0.18);
+          border-color: rgba(245, 196, 67, 0.7);
+          box-shadow: 0 0 14px rgba(245, 196, 67, 0.35);
+        }
+
+        .omni-icon {
+          color: #f5c443;
+          animation: spin 16s linear infinite;
+        }
+
+        .omni-select {
+          background: transparent;
+          border: none;
+          color: #f7e7c4;
+          font-size: 0.8rem;
+          font-weight: 600;
+          cursor: pointer;
+          outline: none;
+          max-width: 190px;
+        }
+
+        .omni-select option,
+        .omni-select optgroup {
+          background: #241c14;
+          color: #fff;
+          font-weight: 500;
+        }
+
+        .omni-select optgroup {
+          color: #f5c443;
+          font-weight: 700;
+        }
+      `}</style>
     </div>
   );
 }
