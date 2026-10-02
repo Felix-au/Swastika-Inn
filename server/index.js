@@ -54,15 +54,19 @@ function requireAuth(req, res, next) {
 // 1. PUBLIC ENDPOINTS
 // ==========================================
 
-// Health check
-app.get('/api/health', (req, res) => {
+// Health check (supports both /health and /api/health for Render/cloud monitors)
+const handleHealthCheck = (req, res) => {
   res.json({
     status: 'online',
+    service: 'swastika-inn-backend',
     timestamp: new Date().toISOString(),
     database: db.isReady() ? 'mongodb_connected' : 'pending_mongodb_uri',
     cloudinaryConfigured: mediaService.isCloudinaryConfigured()
   });
-});
+};
+
+app.get('/health', handleHealthCheck);
+app.get('/api/health', handleHealthCheck);
 
 // Live Public Content (Cached with ETag & stale-while-revalidate)
 app.get('/api/content', async (req, res) => {
