@@ -26,8 +26,8 @@ export default function RoomsSection({ onSelectRoom, onOpenBooking }) {
 
         {/* Rooms Grid - Centered Symmetrical Layout */}
         <div className="rooms-grid">
-          {roomsList.map((room) => (
-            <div key={room.id} className="room-card">
+          {roomsList.map((room, index) => (
+            <div key={room.id} className="room-card" data-cms-target={`rooms.${index}`}>
               {/* Image & Badges */}
               <div className="room-img-container">
                 <img 
@@ -35,10 +35,11 @@ export default function RoomsSection({ onSelectRoom, onOpenBooking }) {
                   alt={room.title} 
                   className="room-img"
                   loading="lazy"
+                  data-cms-target={`rooms.${index}.image`}
                 />
                 <div className="room-badges-top">
-                  <span className="room-tag-pill">{room.tag}</span>
-                  <span className="room-capacity-pill">
+                  <span className="room-tag-pill" data-cms-target={`rooms.${index}.tag`}>{room.tag}</span>
+                  <span className="room-capacity-pill" data-cms-target={`rooms.${index}.capacity`}>
                     <Users size={12} />
                     <span>{room.capacity}</span>
                   </span>
@@ -55,19 +56,19 @@ export default function RoomsSection({ onSelectRoom, onOpenBooking }) {
 
               {/* Room Content */}
               <div className="room-card-body">
-                <div className="room-meta-row">
+                <div className="room-meta-row" data-cms-target={`rooms.${index}.bed`}>
                   <span className="room-spec-item">
                     <Bed size={14} className="meta-icon" />
                     <span>{room.bedType}</span>
                   </span>
-                  <span className="room-spec-item">
+                  <span className="room-spec-item" data-cms-target={`rooms.${index}.bath`}>
                     <Droplets size={14} className="meta-icon" />
                     <span>Attached Bath &amp; Geyser</span>
                   </span>
                 </div>
 
-                <h3 className="room-card-title">{room.title}</h3>
-                <p className="room-card-desc">{room.description}</p>
+                <h3 className="room-card-title" data-cms-target={`rooms.${index}.title`}>{room.title}</h3>
+                <p className="room-card-desc" data-cms-target={`rooms.${index}.desc`}>{room.description}</p>
 
                 {/* Amenities Badges */}
                 <div className="room-amenities-list">
